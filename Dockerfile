@@ -1,4 +1,4 @@
-FROM ghcr.io/osgeo/gdal:ubuntu-small-3.8.5 as gdal
+FROM ghcr.io/osgeo/gdal:ubuntu-full-3.8.5 as gdal
 
 FROM gdal as builder
 LABEL maintainer Camptocamp "info@camptocamp.com"
@@ -25,7 +25,7 @@ COPY checkout_release /tmp
 RUN cd /src \
     && /tmp/checkout_release ${MAPSERVER_BRANCH}
 
-COPY instantclient /tmp/instantclient
+# COPY instantclient /tmp/instantclient
 
 ARG WITH_ORACLE=OFF
 
