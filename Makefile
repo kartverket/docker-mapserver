@@ -2,7 +2,7 @@ DOCKER_TAG ?= 8-2
 export DOCKER_TAG
 MAPSERVER_BRANCH ?= branch-8-2
 WITH_ORACLE ?= OFF
-DOCKER_IMAGE ?= camptocamp/mapserver
+DOCKER_IMAGE ?= mapserver
 ROOT = $(dir $(realpath $(firstword $(MAKEFILE_LIST))))
 GID = $(shell id -g)
 UID = $(shell id -u)

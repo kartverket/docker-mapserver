@@ -6,7 +6,7 @@ on:
 
 env:
   DOCKER_REGISTRY: ghcr.io
-  IMAGE_NAME: kartverket/ms8poc
+  IMAGE_NAME: kartverket/mapserver
 
 jobs:
   build:
