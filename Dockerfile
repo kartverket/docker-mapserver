@@ -1,6 +1,6 @@
-FROM ghcr.io/osgeo/gdal:ubuntu-full-3.8.5 as gdal
+FROM ghcr.io/osgeo/gdal:ubuntu-full-3.9.2 AS gdal
 
-FROM gdal as builder
+FROM gdal AS builder
 LABEL maintainer Camptocamp "info@camptocamp.com"
 SHELL ["/bin/bash", "-o", "pipefail", "-cux"]
 
@@ -14,7 +14,7 @@ RUN --mount=type=cache,target=/var/cache,sharing=locked \
         libfreetype6-dev libfcgi-dev libcurl4-gnutls-dev libcairo2-dev libxml2-dev \
         libxslt1-dev python3-dev php-dev libexempi-dev lcov lftp ninja-build git curl \
         clang libprotobuf-c-dev protobuf-c-compiler libharfbuzz-dev libcairo2-dev librsvg2-dev \
-    && ln -s /usr/local/lib/libproj.so.25 /usr/local/lib/libproj.so
+    && apt-get install proj-bin proj-data libproj-dev --assume-yes 
 
 ARG MAPSERVER_BRANCH=branch-8-2
 ARG MAPSERVER_REPO=https://github.com/mapserver/mapserver
@@ -67,7 +67,7 @@ RUN if test "${WITH_ORACLE}" = "ON"; then \
 RUN ninja install \
     && if test "${WITH_ORACLE}" = "ON"; then rm -rf /usr/local/lib/sdk; fi
 
-FROM gdal as runner
+FROM gdal AS runner
 LABEL maintainer Camptocamp "info@camptocamp.com"
 SHELL ["/bin/bash", "-o", "pipefail", "-cux"]
 
@@ -89,7 +89,7 @@ RUN --mount=type=cache,target=/var/cache,sharing=locked \
     && apt-get upgrade --assume-yes \
     && apt-get install --assume-yes --no-install-recommends ca-certificates apache2 libapache2-mod-fcgid \
         libfribidi0 librsvg2-2 libpng16-16 libgif7 libfcgi0ldbl \
-        libxslt1.1 libprotobuf-c1 libaio1 libpcre2-posix3 glibc-tools
+        libxslt1.1 libprotobuf-c1 libpcre2-posix3 glibc-tools
 
 RUN a2enmod fcgid headers status \
     && a2dismod -f auth_basic authn_file authn_core authz_user autoindex dir \
