@@ -17,7 +17,7 @@ RUN --mount=type=cache,target=/var/cache,sharing=locked \
     && apt-get install proj-bin proj-data libproj-dev --assume-yes 
 
 ARG MAPSERVER_BRANCH=branch-8-2
-ARG MAPSERVER_REPO=https://github.com/mapserver/mapserver
+ARG MAPSERVER_REPO=https://github.com/carsmie/mapserver
 
 RUN git clone ${MAPSERVER_REPO} --branch=${MAPSERVER_BRANCH} --depth=100 /src
 
