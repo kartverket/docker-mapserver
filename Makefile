@@ -1,6 +1,6 @@
-DOCKER_TAG ?= 8-2
+DOCKER_TAG ?= latest
 export DOCKER_TAG
-MAPSERVER_BRANCH ?= branch-8-2
+MAPSERVER_BRANCH ?= main
 WITH_ORACLE ?= OFF
 DOCKER_IMAGE ?= mapserver
 ROOT = $(dir $(realpath $(firstword $(MAKEFILE_LIST))))

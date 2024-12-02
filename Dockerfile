@@ -1,4 +1,4 @@
-FROM ghcr.io/osgeo/gdal:ubuntu-full-3.9.2 AS gdal
+FROM ghcr.io/osgeo/gdal:ubuntu-full-3.9.3 AS gdal
 
 FROM gdal AS builder
 LABEL maintainer Camptocamp "info@camptocamp.com"
@@ -17,7 +17,7 @@ RUN --mount=type=cache,target=/var/cache,sharing=locked \
     && apt-get install proj-bin proj-data libproj-dev --assume-yes 
 
 ARG MAPSERVER_BRANCH=main
-ARG MAPSERVER_REPO=https://github.com/carsmie/mapserver
+ARG MAPSERVER_REPO=https://github.com/mapserver/mapserver
 
 RUN git clone ${MAPSERVER_REPO} --branch=${MAPSERVER_BRANCH} --depth=100 /src
 
